@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+  <head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Zombs Tracker - Zombs Royale Stats, Leaderboards & More!
+    </title>
+    <script src="https://kit.fontawesome.com/af5ddc1d66.js" crossorigin="anonymous"></script>
+    <link rel="icon" type="image/png" href="favi.png"/>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+
+    <meta property="og:title" content="Zombs Tracker" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://tracker.projectagon.repl.co/cosmetics" />
+<meta property="og:image" content="favi.png" />
+<meta property="og:description" content="Welcome to Zombs Tracker! This website lets you track ZombsRoyale.io stats, leaderboards, and more! Check what's in the shop today as well as which quests are available for you to complete! Currently home to over 20,000,000 player's stats!" />
+<meta name="theme-color" content="#808080">
+
+<body>
+<div class="headerBar">
+  <img style="vertical-align: middle;" width="55px" src="favi.png" class="logo" id="logo"></img>
+  <p class="headerTitle">Zombs Tracker</p>
+  <p class="selectedOnHeader"><i class="fas fa-home" style="color:#abffb5;"></i> <a href="index.html">Stats</a></p>
+  <p class="OnHeader"><i class="fas fa-chart-bar" style="color:#DDDDDD;"></i> <a href="#">Leaderboards</a></p>
+  <p class="OnHeader"><i class="fas fa-store" style="color:#DDDDDD;"></i> <a href="#">Shop</a></p>
+  <p class="OnHeader"><i class="fas fa-chess-rook" style="color:#DDDDDD;"></i> <a href="#">Quests</a></p>
+  <p class="OnHeader"><i class="fas fa-tshirt" style="color:#DDDDDD;"></i> <a href="cosmetics/skins.html">Cosmetics</a></p>
+  <button class="button" id="searchstats" onclick="launchSearch();">Search stats</button>
+  <input type="text" id="myInput" autocomplete="off" placeholder="Enter a Zombs Royale tag...">
+  </div>
+    <center>
+      <p class="fadeInTitle">Zombs Tracker<span style="font-size:30px; opacity: 0.6;">&nbsp;v1.0</span></p><br>
+
+      <div id="wrapperdiv">
+        <div id="firstdiv">
+          <p style="font-size: 20px; color: #fcd861;"><i style="font-size: 20px; color: #fcd861;" class="fas fa-gamepad"></i> Tracking stats for over 20,000,000 players!</p>
+        <p>Welcome to Zombs Tracker! This website lets you track ZombsRoyale.io stats, leaderboards, and more! Check what's in the shop today as well as which quests are available for you to complete!</p>
+        <input onchange="keySFX();" type="text" id="minimyInput" autocomplete="off" placeholder="Enter a Zombs Royale tag...">
+        <button class="minibutton" id="minisearchstats" onclick="launchMiniSearch();">Search stats</button>
+        </div>
+        <div id="seconddiv"><br>
+          <iframe frameBorder="0" width="450" height="250"
+src="https://www.youtube.com/embed/AQXhihWAENI?autoplay=1&amp;mute=1&amp;controls=0&amp;loop=1&amp;playlist=AQXhihWAENI">
+</iframe><br><br>
+<a style="opacity: 0.6;" href="tos.html">Terms of Service</a><br>
+<a style="opacity: 0.6;" href="privacy.html">Privacy Policy</a>
+          </div>
+        </div>
+      <center>
+  <div class="footer">
+  <p>© 2020-2021 Zombs Tracker Dev</p>
+</div>
+<div class="leftfooter">
+  <button class="discordbutton" id="discbtn" onclick="discord();"><i class="fab fa-discord"></i>&nbsp;&nbsp;Discord</button>
+  <button class="redditbutton" id="redditbtn" onclick="subreddit();"><i class="fab fa-reddit"></i>&nbsp;&nbsp;Reddit</button>
+  <button class="miscbutton" id="regbtn"><i class="fas fa-thumbs-up"></i>&nbsp;&nbsp;Feedback</button>
+</div>
+<script>
+  function launchSearch() {
+    var x = document.getElementById("myInput");
+    var y = x.value.includes('#');
+    if (x.value === "") {
+      var audio = new Audio('https://tracker--projectagon.repl.co/sfx/menu_error.wav');
+      audio.play();
+      setTimeout(function(){alert("Please enter a tag to search.");},400);
+      return;
+    }
+    if (!y) {
+      var audio = new Audio('https://tracker--projectagon.repl.co/sfx/menu_error.wav');
+      audio.play();
+      setTimeout(function(){alert("The tag you have entered is formatted wrong. Please try again.");},400)
+    } else {
+      z = x.value.replace("#", "%23");
+      window.open('/search?q=' + z, '_self');
+    }
+  }
+
+  function keySFX() {
+    var audio = new Audio('https://tracker--projectagon.repl.co/sfx/player_hit_confirm.wav');
+    audio.play();
+  }
+
+  $("#myInput").on("input", function(){
+        var audio = new Audio('https://tracker--projectagon.repl.co/sfx/player_hit_confirm.wav');
+        audio.play();
+    });
+
+  function launchMiniSearch() {
+    var x = document.getElementById("minimyInput");
+    var y = x.value.includes('#');
+    if (x.value === "") {
+      var audio = new Audio('https://tracker--projectagon.repl.co/sfx/menu_error.wav');
+      audio.play();
+      alert("Please enter a tag to search.");
+      return;
+    }
+    if (!y) {
+      var audio = new Audio('https://tracker--projectagon.repl.co/sfx/menu_error.wav');
+      audio.play();
+      alert("The tag you have entered is formatted wrong. Please try again.");
+    } else {
+      z = x.value.replace("#", "%23");
+      window.open('/search?q=' + z, '_self');
+    }
+  }
+
+  function subreddit() {
+    window.open('https://reddit.com/r/zombstracker', '_blank');
+  }
+
+  function discord() {
+    window.open('https://discord.gg/D92vRst', '_blank');
+  }
+
+  document.getElementById("logo").addEventListener("click", goHome);
+
+  function goHome() {
+    window.open('https://tracker--projectagon.repl.co/', '_self')
+  }
+  </script>
+</body>
+
+</html>
